@@ -1,48 +1,28 @@
+package client;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Client extends JFrame {
+public class ClientGUI extends JFrame implements ClientView {
 
     private static final int WINDOWS_HEIGHT = 400;
     private static final int WINDOWS_WIDTH = 507;
     private static final int WINDOWS_POSX = 800;
     private static final int WINDOWS_POSY = 300;
 
-    private JPanel topPanel;
 
-    private JPanel addressPanel;
-
-    private JTextField addressField;
-
-    private JTextField portField;
-
-    private JPanel authenticationPanel;
-
-    private JTextField loginField;
-
+    private JPanel topPanel, addressPanel, authenticationPanel, bottomPanel;
+    private JTextField addressField, portField, loginField, sendField;
     private JPasswordField passwordField;
-
-    private JButton loginButton;
-
+    private JButton loginButton, sendButton;
+    private JTextArea chat;
     private JScrollPane scrollPanel;
 
+    private ClientModel clientModel;
 
-    private JTextArea chat;
-
-
-    private JPanel bottomPanel;
-
-    private JTextField sendField;
-
-    private JButton sendButton;
-
-    private Server server;
-
-    private Client client;
-
-    Client(Server server) {
+    public ClientGUI() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocation(WINDOWS_POSX, WINDOWS_POSY);
         setSize(WINDOWS_WIDTH, WINDOWS_HEIGHT);
@@ -52,9 +32,7 @@ public class Client extends JFrame {
         setScrollArea();
         setBottomPanel();
         setVisible(true);
-        this.server = server;
     }
-
 
     private void setTopPanel() {
         topPanel = new JPanel(new GridLayout(2, 1));
@@ -79,8 +57,9 @@ public class Client extends JFrame {
         passwordField.setEchoChar('*');
         loginButton = new JButton("Login");
         loginButton.addActionListener(e -> {
-            loginField.setText(loginField.getText());
-            passwordField.setText(passwordField.getText());
+            this.clientModel.setLogin(this.loginField.getText());
+            this.clientModel.setPassword(this.passwordField.getText());
+            this.clientModel.sentDate();
         });
         authenticationPanel.add(loginField);
         authenticationPanel.add(passwordField);
@@ -88,6 +67,7 @@ public class Client extends JFrame {
         add(authenticationPanel, BorderLayout.NORTH);
         return authenticationPanel;
     }
+
 
     private void setChat() {
         chat = new JTextArea();
@@ -106,35 +86,30 @@ public class Client extends JFrame {
         sendField = new JTextField(" ");
         sendField.setSize(50, 50);
         sendButton = new JButton("Send");
-        sendMessage(sendButton, sendField, chat);
+        sendButton.addActionListener(e -> sendMessage());
         bottomPanel.add(sendField);
         bottomPanel.add(sendButton);
         add(bottomPanel, BorderLayout.SOUTH);
     }
 
-
-    private void sendMessage(JButton button, JTextField field, JTextArea textArea) {
-        button.addActionListener(e -> {
-            if (server.isRunning()) {
-                String text = field.getText();
-                field.setText("");
-                textArea.append(this.loginField.getText() + ": " + text + "\n");
-                this.client = server.getFirstClient();
-                if (client == this) client = server.getSecondClient();
-                client.appendChatText(this.loginField.getText() + ": " + text + "\n");
-
-            } else textArea.setText("Извините сервер выключен!");
-        });
+    @Override
+    public void sendMessage() {
+            String text = sendField.getText();
+            clientModel.sendMessage(text);
+            sendField.setText("");
     }
 
-
+    @Override
     public String getChatText() {
-        return this.chat.getText();
+        return chat.getText();
     }
 
-    public void appendChatText(String chatText) {
-        chat.append(chatText);
+    @Override
+    public void updateChatText(String chatText) {
+        this.chat.append(chatText);
     }
 
-
+    public void setClientModel(ClientModel clientModel) {
+        this.clientModel = clientModel;
+    }
 }
