@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="MavenProject:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/MavenProject_jar</output-path>
+    <root id="archive" name="MavenProject.jar">
+      <element id="module-output" name="MavenProject" />
+      <element id="module-test-output" name="MavenProject" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/apache/commons/commons-math3/3.6.1/commons-math3-3.6.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
