@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/Collections/Collections.iml" filepath="$PROJECT_DIR$/Collections/Collections.iml" />
       <module fileurl="file://$PROJECT_DIR$/Generic/Generic.iml" filepath="$PROJECT_DIR$/Generic/Generic.iml" />
       <module fileurl="file://$PROJECT_DIR$/JDK.iml" filepath="$PROJECT_DIR$/JDK.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Multithreading/Multithreading.iml" filepath="$PROJECT_DIR$/Multithreading/Multithreading.iml" />
     </modules>
   </component>
 </project>

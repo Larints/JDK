@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< HEAD
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_STRING" value="--enable-preview" />
+=======
   <component name="CompilerConfiguration">
     <annotationProcessing>
       <profile name="Maven default annotation processors profile" enabled="true">
@@ -12,5 +16,6 @@
     <bytecodeTargetLevel>
       <module name="Collections" target="20" />
     </bytecodeTargetLevel>
+>>>>>>> origin/main
   </component>
 </project>
