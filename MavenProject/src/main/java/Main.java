@@ -1,3 +1,5 @@
+import lombok.Getter;
+
 import java.util.Random;
 
 public class Main {
